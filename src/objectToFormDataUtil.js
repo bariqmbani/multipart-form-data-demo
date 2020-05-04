@@ -3,7 +3,8 @@ const buildFormData = (formData, data, parentKey) => {
 		data &&
 		typeof data === 'object' &&
 		!(data instanceof Date) &&
-		!(data instanceof File)
+		!(data instanceof File) &&
+		!(data instanceof FileList)
 	) {
 		Object.keys(data).forEach((key) => {
 			buildFormData(
@@ -15,7 +16,9 @@ const buildFormData = (formData, data, parentKey) => {
 	} else {
 		const value = data == null ? '' : data
 
-		formData.append(parentKey, value)
+		for (let i = 0; i < value.length; i++) {
+			formData.append(parentKey, value[i])
+		}
 	}
 }
 

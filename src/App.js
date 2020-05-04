@@ -26,10 +26,7 @@ const App = () => {
 				penjelasan_pihak_terkait: '',
 			},
 		},
-
-		lampiran: {
-			media: [],
-		},
+		media: [],
 		penanggung_jawab: {
 			nama: '',
 			jabatan: '',
@@ -58,22 +55,7 @@ const App = () => {
 	}
 
 	const onChangeFiles = (event) => {
-		if (event.target.files)
-			setData({
-				...data,
-				lampiran: {
-					...data['lampiran'],
-					media: event.target.files,
-				},
-			})
-		else
-			setData({
-				...data,
-				lampiran: {
-					...data['lampiran'],
-					media: {},
-				},
-			})
+		setData({ ...data, media: event.target.files })
 	}
 
 	const onSubmit = async (event) => {
