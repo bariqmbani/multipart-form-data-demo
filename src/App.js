@@ -26,13 +26,14 @@ const App = () => {
 				penjelasan_pihak_terkait: '',
 			},
 		},
-		media: [],
 		penanggung_jawab: {
 			nama: '',
 			jabatan: '',
 			nip: '',
 		},
 	})
+
+	const [media, setMedia] = React.useState([])
 
 	const onChange = (event, property, array = false, index) => {
 		if (property)
@@ -55,13 +56,19 @@ const App = () => {
 	}
 
 	const onChangeFiles = (event) => {
-		setData({ ...data, media: event.target.files })
+		setMedia(event.target.files)
 	}
 
 	const onSubmit = async (event) => {
 		event.preventDefault()
 		console.log(data)
+
 		const formData = objectToFormData(data)
+
+		for (let i = 0; i < media.length; i++) {
+			formData.append(`media`, media[i])
+		}
+
 		for (let pair of formData.entries()) {
 			console.log(pair[0] + ', ' + pair[1])
 		}

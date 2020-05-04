@@ -16,9 +16,7 @@ const buildFormData = (formData, data, parentKey) => {
 	} else {
 		const value = data == null ? '' : data
 
-		for (let i = 0; i < value.length; i++) {
-			formData.append(parentKey, value[i])
-		}
+		formData.append(parentKey, value)
 	}
 }
 
