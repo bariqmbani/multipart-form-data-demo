@@ -19,13 +19,14 @@ const App = () => {
 			besar_anggaran: '',
 		},
 		proses: '',
-		pihak_terkait: [
-			{
+		pihak_terkait: {
+			0: {
 				lembaga: '',
 				peran: '',
-				penjelasan: '',
+				penjelasan_pihak_terkait: '',
 			},
-		],
+		},
+
 		lampiran: {
 			media: [],
 		},
@@ -36,14 +37,22 @@ const App = () => {
 		},
 	})
 
-	const onChange = (event, property) => {
+	const onChange = (event, property, array = false, index) => {
 		if (property)
 			setData({
 				...data,
-				[property]: {
-					...data[property],
-					[event.target.name]: event.target.value,
-				},
+				[property]: array
+					? {
+							...data[property],
+							[index]: {
+								...data[property][index],
+								[event.target.name]: event.target.value,
+							},
+					  }
+					: {
+							...data[property],
+							[event.target.name]: event.target.value,
+					  },
 			})
 		else setData({ ...data, [event.target.name]: event.target.value })
 	}
@@ -78,7 +87,8 @@ const App = () => {
 		const config = {
 			headers: {
 				'Content-Type': 'multipart/form-data',
-				'x-auth-token': '<TOKEN>',
+				'x-auth-token':
+					'aweuaweu eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Imluc3RhbnNpIjp7Il9pZCI6IjVlYWQwNjk5MWQzOWM5NjAyN2NhNzE5NCIsIm5hbWEiOiJLZW1lbnRlcmlhbiBQZW5kYXlhZ3VuYWFuIEFwYXJhdHVyIE5lZ2FyYSBkYW4gUmVmb3JtYXNpIEJpcm9rcmFzaSIsIm5hbWFfcGVuZGVrIjoiS2VtZW5wYW4ifSwic3VzcGVuc2kiOmZhbHNlLCJsb2dpbl9hd2FsIjp0cnVlLCJfaWQiOiI1ZWFkMjEzMDk5MTMyOTMwZDg3OWYzYzUiLCJuYW1hIjoiU3VwZXIgS2VtZW5wYW4gU2F0dSIsInJvbGUiOiJzdXBlcl9hZG1pbiIsInVzZXJuYW1lIjoic3VwZXJrZW1lbnBhbjEiLCJ0YW5nZ2FsX2RpYnVhdCI6IjIwMjAtMDUtMDJUMDc6Mjg6NDguMjYzWiIsInRhbmdnYWxfZGlwZXJiYXJ1aSI6IjIwMjAtMDUtMDJUMDc6Mjg6NDguMjYzWiIsIl9fdiI6MH0sImlhdCI6MTU4ODQwNTc1NiwiZXhwIjoxNTkwOTk3NzU2fQ.ttenpcgoftj7h54fPFSHgY-u43Tv_XmBL2EC6K5vctM',
 			},
 		}
 
@@ -198,7 +208,9 @@ const App = () => {
 							<div className="form-group">
 								<label htmlFor="lembaga">lembaga</label>
 								<input
-									onChange={(event) => onChange(event, 'pihak_terkait')}
+									onChange={(event) =>
+										onChange(event, 'pihak_terkait', true, 0)
+									}
 									type="text"
 									name="lembaga"
 									className="form-control"
@@ -207,7 +219,9 @@ const App = () => {
 							<div className="form-group">
 								<label htmlFor="peran">peran</label>
 								<input
-									onChange={(event) => onChange(event, 'pihak_terkait')}
+									onChange={(event) =>
+										onChange(event, 'pihak_terkait', true, 0)
+									}
 									type="text"
 									name="peran"
 									className="form-control"
@@ -218,7 +232,43 @@ const App = () => {
 									penjelasan_pihak_terkait
 								</label>
 								<textarea
-									onChange={(event) => onChange(event, 'pihak_terkait')}
+									onChange={(event) =>
+										onChange(event, 'pihak_terkait', true, 0)
+									}
+									name="penjelasan_pihak_terkait"
+									className="form-control"
+								/>
+							</div>
+							<div className="form-group">
+								<label htmlFor="lembaga">lembaga</label>
+								<input
+									onChange={(event) =>
+										onChange(event, 'pihak_terkait', true, 1)
+									}
+									type="text"
+									name="lembaga"
+									className="form-control"
+								/>
+							</div>
+							<div className="form-group">
+								<label htmlFor="peran">peran</label>
+								<input
+									onChange={(event) =>
+										onChange(event, 'pihak_terkait', true, 1)
+									}
+									type="text"
+									name="peran"
+									className="form-control"
+								/>
+							</div>
+							<div className="form-group">
+								<label htmlFor="penjelasan_pihak_terkait">
+									penjelasan_pihak_terkait
+								</label>
+								<textarea
+									onChange={(event) =>
+										onChange(event, 'pihak_terkait', true, 1)
+									}
 									name="penjelasan_pihak_terkait"
 									className="form-control"
 								/>
